@@ -96,7 +96,22 @@ class Funcoes
 
      * */
     public function SegundoMaior(array $arr): int {
-        
+        $maior = 0;
+        $segundoMaior = 0;
+
+        foreach($arr as $array){
+            foreach($array as $numero){
+                if($numero > $maior){
+                    $segundoMaior = $maior;
+                    $maior = $numero;
+                }
+                if($numero > $segundoMaior && $numero < $maior){
+                    $segundoMaior = $numero;
+                }
+            }
+        }
+
+        return $segundoMaior;
     }
 	
 	
@@ -150,3 +165,13 @@ class Funcoes
 
     $primo = $funcoes->PrimoAnterior(23);
     echo "<br>O primo anterior é ".$primo;
+
+    $array = array (
+        array(260,28,18),
+        array(90,1500,130),
+        array(24,5,2),
+        array(80,1700,15000)
+        );
+
+    $segundoMaior = $funcoes->SegundoMaior($array);
+    echo "<br> O segundo maior é: ".$segundoMaior;
