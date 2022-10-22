@@ -45,7 +45,29 @@ class Funcoes
 
      * */
     public function PrimoAnterior(int $numero): int {
-       
+        $primo = 0;
+        $is_not_primo = false;
+        $numero--;
+
+        while($primo == 0){
+            
+            $a = $numero;
+            while(!$is_not_primo && $a > 1){
+                if($numero%$a == 0 && $numero != $a){
+                    $is_not_primo = true;
+                }
+                $a--;
+            }
+
+            if(!$is_not_primo){
+                $primo = $numero;
+            }
+
+            $is_not_primo = false;
+            $numero = $numero - 1;
+        }
+
+        return $primo;
     }
 
 
@@ -125,3 +147,6 @@ class Funcoes
     $funcoes = new Funcoes();
     $seculo = $funcoes->SeculoAno(1900);
     echo "O século é: ".$seculo;
+
+    $primo = $funcoes->PrimoAnterior(23);
+    echo "<br>O primo anterior é ".$primo;
