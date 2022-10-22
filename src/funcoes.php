@@ -152,18 +152,43 @@ class Funcoes
      * */
     
 	public function SequenciaCrescente(array $arr): bool {
-        
-        return false;
+        $is_crescente = false;
+        $iteracao = 0;
+
+        foreach($arr as $key => $array){
+            $array_alterado = $arr;
+            unset($array_alterado[$key]);
+            $valor_anterior = 0;
+            
+            foreach($array_alterado as $item){
+                if($iteracao != 0){
+                    if($item <= $valor_anterior){
+                        $is_crescente = false;
+                        break;
+                    }
+                    $is_crescente = true;
+                }
+                
+                $iteracao++;
+                $valor_anterior = $item;
+            }
+
+            if($is_crescente) break;
+        }
+
+        return $is_crescente;
     }
 
     
 }
 
+// TESTES //
+
     $funcoes = new Funcoes();
-    $seculo = $funcoes->SeculoAno(1900);
+    $seculo = $funcoes->SeculoAno(1801);
     echo "O século é: ".$seculo;
 
-    $primo = $funcoes->PrimoAnterior(23);
+    $primo = $funcoes->PrimoAnterior(34);
     echo "<br>O primo anterior é ".$primo;
 
     $array = array (
@@ -175,3 +200,8 @@ class Funcoes
 
     $segundoMaior = $funcoes->SegundoMaior($array);
     echo "<br> O segundo maior é: ".$segundoMaior;
+
+    $array = [123, -17, -5, 1, 2, 3, 12, 43, 45] ;
+    $sequencia = $funcoes->SequenciaCrescente($array);
+    echo "<br>A sequência é crescente: ".($sequencia == 1 ? "verdadeiro" : "falso");
+   
